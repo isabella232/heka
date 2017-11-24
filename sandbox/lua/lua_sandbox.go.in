@@ -653,7 +653,7 @@ func go_lua_inject_message(ptr unsafe.Pointer, payload *C.char,
 }
 
 type LuaSandbox struct {
-	lsb           *C.lua_sandbox
+	lsb           *C.lsb_lua_sandbox
 	pack          *pipeline.PipelinePack
 	injectMessage func(payload, payload_type, payload_name string) int
 	config        map[string]interface{}
