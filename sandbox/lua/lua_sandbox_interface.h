@@ -5,8 +5,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /// Heka Go interfaces for the Lua sandbox @file
-#ifndef lsb_lua_sandbox_interface_
-#define lsb_lua_sandbox_interface_
+#ifndef lua_sandbox_interface_
+#define lua_sandbox_interface_
 
 #include <luasandbox.h>
 #include <luasandbox/lua.h>
