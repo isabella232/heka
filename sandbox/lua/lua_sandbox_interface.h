@@ -5,8 +5,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /// Heka Go interfaces for the Lua sandbox @file
-#ifndef lua_sandbox_interface_
-#define lua_sandbox_interface_
+#ifndef lsb_lua_sandbox_interface_
+#define lsb_lua_sandbox_interface_
 
 #include <luasandbox.h>
 #include <luasandbox/lua.h>
@@ -27,7 +27,7 @@ extern const int LMW_ERR_INVALID_FIELD_NAME;
 *
 * @return int Zero on success, non-zero on failure.
 */
-int process_message(lua_sandbox* lsb);
+int process_message(lsb_lua_sandbox* lsb);
 
 /**
 * Called when the plugin timer expires (the garbage collector is run after
@@ -38,7 +38,7 @@ int process_message(lua_sandbox* lsb);
 * @return int Zero on success, non-zero on failure.
 *
 */
-int timer_event(lua_sandbox* lsb, long long ns);
+int timer_event(lsb_lua_sandbox* lsb, long long ns);
 
 /**
 * Reads a configuration variable provided in the Heka toml and returns the
@@ -88,7 +88,7 @@ int inject_message(lua_State* lua);
  *
  * @return int 0 on success
  */
-int sandbox_init(lua_sandbox* lsb, const char* data_file, const char* plugin_type);
+int sandbox_init(lsb_lua_sandbox* lsb, const char* data_file, const char* plugin_type);
 
 /**
  * Sends a shutdown message to the sandbox.
@@ -96,7 +96,7 @@ int sandbox_init(lua_sandbox* lsb, const char* data_file, const char* plugin_typ
  * @param lsb Pointer to the sandbox.
  *
  */
-void sandbox_stop(lua_sandbox* lsb);
+void sandbox_stop(lsb_lua_sandbox* lsb);
 
 #endif
 

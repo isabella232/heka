@@ -19,7 +19,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Calls to Lua
 ////////////////////////////////////////////////////////////////////////////////
-int process_message(lua_sandbox* lsb)
+int process_message(lsb_lua_sandbox* lsb)
 {
     static const char* func_name = "process_message";
     lua_State* lua = lsb_get_lua(lsb);
@@ -89,7 +89,7 @@ int process_message(lua_sandbox* lsb)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-int timer_event(lua_sandbox* lsb, long long ns)
+int timer_event(lsb_lua_sandbox* lsb, long long ns)
 {
     static const char* func_name = "timer_event";
     lua_State* lua = lsb_get_lua(lsb);
@@ -137,7 +137,7 @@ int read_config(lua_State* lua)
     if (NULL == luserdata) {
         luaL_error(lua, "read_config() invalid lightuserdata");
     }
-    lua_sandbox* lsb = (lua_sandbox*)luserdata;
+    lsb_lua_sandbox* lsb = (lsb_lua_sandbox*)luserdata;
 
     if (lua_gettop(lua) != 1) {
         luaL_error(lua, "read_config() must have a single argument");
@@ -177,7 +177,7 @@ int read_message(lua_State* lua)
     if (NULL == luserdata) {
         luaL_error(lua, "read_message() invalid lightuserdata");
     }
-    lua_sandbox* lsb = (lua_sandbox*)luserdata;
+    lsb_lua_sandbox* lsb = (lsb_lua_sandbox*)luserdata;
 
     int n = lua_gettop(lua);
     if (n < 1 || n > 3) {
@@ -233,7 +233,7 @@ int write_message(lua_State* lua)
     if (NULL == luserdata) {
         luaL_error(lua, "write_message() invalid lightuserdata");
     }
-    lua_sandbox* lsb = (lua_sandbox*)luserdata;
+    lsb_lua_sandbox* lsb = (lsb_lua_sandbox*)luserdata;
 
     int n = lua_gettop(lua);
     if (n < 2 || n > 5) {
@@ -294,7 +294,7 @@ int read_next_field(lua_State* lua)
     if (NULL == luserdata) {
         luaL_error(lua, "read_next_field() invalid lightuserdata");
     }
-    lua_sandbox* lsb = (lua_sandbox*)luserdata;
+    lsb_lua_sandbox* lsb = (lsb_lua_sandbox*)luserdata;
 
     if (lua_gettop(lua) != 0) {
         luaL_error(lua, "read_next_field() takes no arguments");
@@ -407,7 +407,7 @@ int inject_message(lua_State* lua)
         return 1;
     }
 
-    lua_sandbox* lsb = (lua_sandbox*)luserdata;
+    lsb_lua_sandbox* lsb = (lsb_lua_sandbox*)luserdata;
     size_t len = 0;
     const char* output = NULL;
     if (t == LUA_TSTRING) {
@@ -445,7 +445,7 @@ int inject_payload(lua_State* lua)
     if (NULL == luserdata) {
         luaL_error(lua, "%s invalid lightuserdata", fn);
     }
-    lua_sandbox* lsb = (lua_sandbox*)luserdata;
+    lsb_lua_sandbox* lsb = (lsb_lua_sandbox*)luserdata;
 
     const char* type = default_type;
     const char* name = "";
@@ -477,7 +477,7 @@ int inject_payload(lua_State* lua)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-int sandbox_init(lua_sandbox* lsb, const char* data_file, const char* plugin_type)
+int sandbox_init(lsb_lua_sandbox* lsb, const char* data_file, const char* plugin_type)
 {
     static const char *output = "output";
     if (!lsb || !plugin_type) return 1;
@@ -536,7 +536,7 @@ static void lstop (lua_State *L, lua_Debug *ar) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void sandbox_stop(lua_sandbox* lsb)
+void sandbox_stop(lsb_lua_sandbox* lsb)
 {
     lua_State* lua = lsb_get_lua(lsb);
     lua_sethook(lua, lstop, LUA_MASKCALL | LUA_MASKRET | LUA_MASKCOUNT, 1);
