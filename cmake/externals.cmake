@@ -19,7 +19,7 @@ if(INCLUDE_SANDBOX)
     externalproject_add(
         ${SANDBOX_PACKAGE}
         GIT_REPOSITORY https://github.com/lyft/lua_sandbox.git
-        GIT_TAG bd72e2507331e4328b5b7542fe8d7b77afa0c474
+        GIT_TAG v1.2.7
         CMAKE_ARGS ${SANDBOX_ARGS}
         INSTALL_DIR ${PROJECT_PATH}
     )
