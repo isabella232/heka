@@ -694,7 +694,7 @@ func CreateLuaSandbox(conf *sandbox.SandboxConfig) (sandbox.Sandbox, error) {
 	ccfg := C.CString(cfg)
 	defer C.free(unsafe.Pointer(ccfg))
 
-	lsb.lsb = C.lsb_create_custom(unsafe.Pointer(lsb), cs, ccfg)
+	lsb.lsb = C.lsb_create(unsafe.Pointer(lsb), cs, ccfg, NULL)
 
 	if lsb.lsb == nil {
 		return nil, fmt.Errorf("Sandbox creation failed")
